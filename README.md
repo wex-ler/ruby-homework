@@ -7,6 +7,6 @@ A repository for uploading (and reviewing) assignments from [monorkin/learn.rb](
 - *C*
 - **C++**
 - **JavaScript**
-- **Python**
+- **Python** 
 
 [Corgi](https://images.wagwalkingweb.com/media/breed/pembroke-welsh-corgi/appearance/pembroke-welsh-corgi.png)
