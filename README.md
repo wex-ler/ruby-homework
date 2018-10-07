@@ -9,4 +9,4 @@ A repository for uploading (and reviewing) assignments from [monorkin/learn.rb](
 - **JavaScript**
 - **Python** 
 
-[Corgi](https://images.wagwalkingweb.com/media/breed/pembroke-welsh-corgi/appearance/pembroke-welsh-corgi.png)
+![Corgi](https://images.wagwalkingweb.com/media/breed/pembroke-welsh-corgi/appearance/pembroke-welsh-corgi.png)
