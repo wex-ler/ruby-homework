@@ -24,51 +24,34 @@ class Employee
     end
 
     #custom to string
-    def info
-        puts "#{@full_name}, #{@id}"
+    def to_s
+        "#{@full_name}, #{@id}"
     end
-end
-
-#helper function for parsing sentences
-def is_alpha(char)
-    if char.length > 1
-        raise "Function 'is_alpha' takes a character not a string!"
-    end
-
-    (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')
 end
 
 ###derived classes
 
 class Programmer < Employee
-    #disable any unwanted changes by out of class writing, all changes made through parse_languages
-    attr_reader :programming_languages
-
     def initialize(full_name, id, languages)
         super(full_name, id)
         parse_languages(languages)
     end
 
     def parse_languages(sentence)
-        @programming_languages = Array.new
+        @programming_languages = []
 
-        i = 0
-
-        while i < sentence.length
-            sentence[i] = ' ' if is_alpha(sentence[i]) == false
-
-            i += 1
-        end
-
-        #will properly split even on multiple spaces
-        sentence.split(' ').each do |language|
+        sentence.split(/[\s,]+/).each do |language|
             @programming_languages << language
         end
     end
 
-    def info
-        puts "#{@full_name}, #{@id} #{programming_languages}"
+    def to_s
+        super() + " #{programming_languages}"
     end
+
+    #disable meddling with programming languages, as they need to be parsed neatly
+    protected
+        attr_reader :programming_languages
 end
 
 class OfficeManager < Employee
@@ -79,8 +62,8 @@ class OfficeManager < Employee
         @department = department
     end
 
-    def info
-        puts "#{@full_name}, #{@id} (#{department})"
+    def to_s
+        super() + " (#{department})"
     end
 end
 
@@ -97,10 +80,20 @@ def add_employee(employees)
 
     print 'Is the person an [e]mployee, [p]rogrammer or an [o]ffice manager? '
     type = get_action
-    
-    if type != 'e' && type != 'p' && type != 'o'
-        puts 'Improper employee type, please try again with proper input'
-        return
+
+    while !("poe".include? type)
+        if type == 'q'
+            return
+        end
+        
+        #small help section
+        puts 'Improper employee type, please try again with proper input demonstrated below'
+        puts '[e]mployee: consists only of information you have already entered'
+        puts '[p]rogrammer: enter programming languages'
+        puts '[o]ffice manager: enter office department'
+        print 'Type [q]uit to cancel adding the employee, enter any of the above options to continue: '
+
+        type = get_action
     end
 
     employee = nil
@@ -140,7 +133,7 @@ def view_employees(employees)
     end
 
     sorted_employees(employees, criteria).each do |employee|
-        employee.info
+        puts employee
     end
 end
 
@@ -153,38 +146,29 @@ def edit_employees(employees)
     print 'ID: '
     sought.id = gets.chomp
 
-    found = false
+    sought_index = employees.find_index(sought)
 
-    employees.each do |employee|
-        #see overloaded == operator above
-        if sought == employee
-            found = true
+    if sought_index
+        employee = employees[sought_index]
 
-            print "Current employee info: "
-            employee.info
+        puts "Current employee info: #{employee}"
+        puts 'Please enter new employee info below'
 
-            puts 'Please enter new employee info below'
+        print 'Full name: '
+        employee.full_name = gets.chomp
 
-            print 'Full name: '
-            employee.full_name = gets.chomp
+        print 'ID: '
+        employee.id = gets.chomp
 
-            print 'ID: '
-            employee.id = gets.chomp
-
-            case employee
-            when Programmer
-                print 'Programming languages: '
-                employee.parse_languages(gets.chomp)
-            when OfficeManager
-                print 'Office: '
-                employee.department = gets.chomp
-            end
-
-            break
+        case employee
+        when Programmer
+            print 'Programming languages: '
+            employee.parse_languages(gets.chomp)
+        when OfficeManager
+            print 'Office: '
+            employee.department = gets.chomp
         end
-    end
-
-    if !found
+    else
         puts 'Employee is not in the database, please review your input and try again'
     end
 end
