@@ -36,14 +36,14 @@ while true do
     board.status
     puts "Player #{first ? 'O' : 'X'} move."
 
-    print "Where do you want to put the a#{first ? ' circle' : 'n x'} [0 - 8]? "
+    print "Where do you want to put the #{first ? 'circle' : 'x'} [0 - 8]? "
     idx = gets.to_i
 
     if idx < 0 || idx > 8
         puts 'Invalid input, please try again.'
     elsif board[idx] != idx
         puts 'That field is already occupied! Try again.'
-    elsif
+    else
         board[idx] = first ? 'O' : 'X'
 
         first = !first
