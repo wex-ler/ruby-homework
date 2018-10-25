@@ -1,0 +1,21 @@
+<h1>Landing#index</h1>
+<p>Find me in app/views/landing/index.html.erb</p>
+
+<div id = "dog-div">
+    <p class = "grow-up">
+        When I grow up I'd like to have atleast <%= @result %>
+                                                <%= @dog_breed%>s!
+
+        <ul>
+            <% @result.times do |i| %>
+                <li>
+                    Doggo <%= i + 1 %>
+                </li>
+            <% end %>
+        </ul>
+
+        <p>
+            <%= @dog_breed %> is alphabetically a <%= @dog_breed > 'Labrador' ? 'large' : 'small' %> dog.
+        </p>
+    </p>
+</div>
