@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>RubyHomework</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<%= csrf_meta_tags %>
+		<%= csp_meta_tag %>
+
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	</head>
+
+	<body>
+	<%= render 'toastr_rails/flash'  %>
+
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="#">
+			<%= image_tag('logos/ruby.png') %>
+			<span>Ruby Homework</span>
+		</a>
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<%= link_to('Home', root_url, class: 'nav-link') %>
+				</li>
+
+				<li class="nav-item">
+					<%= link_to('Authors', :authors, class: 'nav-link') %>
+				</li>
+
+				<li class="nav-item">
+					<%= link_to('Posts', :posts, class: 'nav-link') %>
+				</li>
+
+				<li class="nav-item">
+					<%= link_to('Comments', :comments, class: 'nav-link') %>
+				</li>
+			</ul>
+
+
+		</div>
+	</nav>
+
+	<main role = "main">
+		<%= yield %>
+	</main>
+
+	</body>
+</html>

@@ -1,0 +1,27 @@
+<div class = "jumbotron">
+    <div class = "container">
+        <h1>Landing#index</h1>
+        <p>Find me in app/views/landing/index.html.erb</p>
+	</div>
+</div>
+
+
+<div id = "dog-div" class = "container">
+    <p class = "grow-up">
+        When I grow up I'd like to have atleast <%= @result %>
+                                                <%= @dog_breed%>s
+		and I'd name them like this:
+	</p>
+
+	<ul>
+		<% @result.times do |i| %>
+			<li>
+				Doggo <%= i + 1 %>
+			</li>
+		<% end %>
+	</ul>
+
+	<p>
+		<%= @dog_breed %> is alphabetically a <%= @dog_breed > 'Labrador' ? 'large' : 'small' %> dog.
+	</p>
+</div>
