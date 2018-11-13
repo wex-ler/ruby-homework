@@ -1,29 +1,14 @@
 <h1>Lets solve a polynomial!</h1>
 
-<form action = "/polynomials" method = "POST">
-    <p>a * X^2 + b * X + c = d</p>
+<%= form_tag "/polynomials", method: :post do %>
+    <p><b>a</b> * X<sup>2</sup> + <b>b</b> * X + <b>c</b> = <b>d</b></p>
 
-    <p>
-        <label for = "a">a:</label>
-        <input type = "number" name = "a" \>
-    </p>
-
-    <p>
-        <label for = "b">b:</label>
-        <input type = "number" name = "b" \>
-    </p>
-
-    <p>
-        <label for = "c">c:</label>
-        <input type = "number" name = "c" \>
-    </p>
-
-    <p>
-        <label for = "d">d:</label>
-        <input type = "number" name = "d" \>
-    </p>
-
-    <input name = "authenticity_token" type = "hidden" value = "<%= form_authenticity_token %>" \>
+    <% [:a, :b, :c, :d].each do |param| %>
+        <p>
+            <%= label_tag(param, "#{param}:") %>
+            <%= number_field nil, param %>
+        </p>
+    <% end %>
 
     <button type = "submit">Solve!</button>
-</form>
+<% end %>
